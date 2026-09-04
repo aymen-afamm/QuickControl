@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QuickControl</string>
+
+    <!-- Main Activity -->
+    <string name="welcome_title">Welcome to QuickControl</string>
+    <string name="welcome_description">QuickControl helps you access essential phone controls without physical buttons.\n\nA small handle on the left edge of your screen gives you instant access to volume, flashlight, screen lock, and more — from any app.</string>
+
+    <!-- Permission Steps -->
+    <string name="step_overlay_title">Step 1: Display Over Other Apps</string>
+    <string name="step_overlay_description">QuickControl needs permission to appear over other apps so the Edge Panel can be accessed from anywhere.</string>
+    <string name="step_overlay_button">Grant Overlay Permission</string>
+    <string name="step_overlay_granted">✓ Permission granted</string>
+
+    <string name="step_lock_title">Step 2: Screen Lock (Optional)</string>
+    <string name="step_lock_description">To lock your screen without the power button, QuickControl needs Device Administrator permission. This only enables the lock screen feature.</string>
+    <string name="step_lock_button">Enable Device Admin</string>
+    <string name="step_lock_granted">✓ Device Admin enabled</string>
+    <string name="step_lock_skip">Skip — I don\'t need this</string>
+
+    <string name="step_accessibility_title">Step 3: Power Menu (Optional)</string>
+    <string name="step_accessibility_description">To open the Android Power Menu (for restart/shutdown), QuickControl needs Accessibility Service permission. This is only used to trigger the system power dialog.</string>
+    <string name="step_accessibility_button">Enable Accessibility Service</string>
+    <string name="step_accessibility_granted">✓ Accessibility Service enabled</string>
+    <string name="step_accessibility_skip">Skip — I don\'t need this</string>
+
+    <string name="start_button">START QUICKCONTROL</string>
+    <string name="stop_button">STOP QUICKCONTROL</string>
+    <string name="service_running">QuickControl is active</string>
+    <string name="service_stopped">QuickControl is not running</string>
+    <string name="open_settings">Settings</string>
+
+    <!-- Edge Panel -->
+    <string name="panel_title">QUICK CONTROL</string>
+    <string name="lock_screen">Lock Screen</string>
+    <string name="power_menu">Power Menu</string>
+    <string name="power_menu_subtitle">Open Android power options</string>
+    <string name="volume_down">Vol −</string>
+    <string name="volume_up">Vol +</string>
+    <string name="mute">Mute</string>
+    <string name="flashlight">Flashlight</string>
+    <string name="settings_title">Settings</string>
+
+    <!-- Panel Status Messages -->
+    <string name="lock_no_permission">Enable Device Admin in app settings to use Lock Screen</string>
+    <string name="power_no_permission">Enable Accessibility Service in app settings to use Power Menu</string>
+    <string name="flashlight_not_available">Flashlight is not available on this device</string>
+    <string name="flashlight_on">Flashlight ON</string>
+    <string name="flashlight_off">Flashlight OFF</string>
+    <string name="muted">Muted</string>
+    <string name="unmuted">Unmuted</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_name">QuickControl Service</string>
+    <string name="notification_channel_description">Shows when QuickControl edge panel is active</string>
+    <string name="notification_title">QuickControl is active</string>
+    <string name="notification_text">Swipe from the left edge to access controls</string>
+    <string name="notification_stop">Stop QuickControl</string>
+
+    <!-- Settings -->
+    <string name="settings_handle_opacity">Handle Opacity</string>
+    <string name="settings_opacity_low">Low</string>
+    <string name="settings_opacity_medium">Medium</string>
+    <string name="settings_opacity_high">High</string>
+    <string name="settings_auto_start">Start on Boot</string>
+    <string name="settings_auto_start_description">Automatically start QuickControl when your phone boots up</string>
+    <string name="settings_battery_title">Battery Optimization</string>
+    <string name="settings_battery_description">To keep QuickControl available at all times, you may need to disable battery optimization for this app.\n\nOn OPPO/ColorOS devices:\n1. Go to Settings → Battery\n2. Find QuickControl\n3. Allow background activity\n4. Disable battery optimization\n\nThis prevents the system from stopping QuickControl in the background.</string>
+    <string name="settings_battery_button">Open Battery Settings</string>
+    <string name="settings_permissions_title">Permissions</string>
+    <string name="settings_about_title">About</string>
+    <string name="settings_about_text">QuickControl v1.0\nA simple utility to replace physical button controls.</string>
+
+    <!-- Accessibility Service -->
+    <string name="accessibility_service_description">QuickControl uses this service only to open the Android Power Menu when you press the Power Menu button in the edge panel. No other accessibility features are used.</string>
+
+    <!-- Device Admin -->
+    <string name="device_admin_description">QuickControl uses Device Administrator permission only to lock the screen when you press the Lock Screen button.</string>
+</resources>

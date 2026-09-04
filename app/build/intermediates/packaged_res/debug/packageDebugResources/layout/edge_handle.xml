@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edgeHandle"
+    android:layout_width="10dp"
+    android:layout_height="60dp"
+    android:background="@drawable/handle_shape" />

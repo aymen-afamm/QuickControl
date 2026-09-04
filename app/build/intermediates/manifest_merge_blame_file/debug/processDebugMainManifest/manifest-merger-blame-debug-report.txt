@@ -1,0 +1,241 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.quickcontrol"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="35" />
+10
+11    <!-- Overlay permission for floating edge panel -->
+12    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+12-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:5:5-78
+12-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:5:22-75
+13
+14    <!-- Foreground service to keep edge panel alive -->
+15    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+15-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:8:5-77
+15-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:8:22-74
+16
+17    <!-- Flashlight control -->
+18    <uses-permission android:name="android.permission.CAMERA" />
+18-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:11:5-65
+18-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:11:22-62
+19
+20    <uses-feature
+20-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:12:5-91
+21        android:name="android.hardware.camera.flash"
+21-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:12:19-63
+22        android:required="false" />
+22-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:12:64-88
+23
+24    <!-- Auto-start after reboot -->
+25    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+25-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:15:5-81
+25-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:15:22-78
+26
+27    <permission
+27-->[androidx.core:core:1.13.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\620080e2b604ab73417670fd89e20084\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+28        android:name="com.quickcontrol.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+28-->[androidx.core:core:1.13.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\620080e2b604ab73417670fd89e20084\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+29        android:protectionLevel="signature" />
+29-->[androidx.core:core:1.13.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\620080e2b604ab73417670fd89e20084\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+30
+31    <uses-permission android:name="com.quickcontrol.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+31-->[androidx.core:core:1.13.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\620080e2b604ab73417670fd89e20084\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+31-->[androidx.core:core:1.13.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\620080e2b604ab73417670fd89e20084\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+32
+33    <application
+33-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:17:5-84:19
+34        android:allowBackup="true"
+34-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:18:9-35
+35        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+35-->[androidx.core:core:1.13.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\620080e2b604ab73417670fd89e20084\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+36        android:debuggable="true"
+37        android:extractNativeLibs="false"
+38        android:icon="@mipmap/ic_launcher"
+38-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:19:9-43
+39        android:label="@string/app_name"
+39-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:20:9-41
+40        android:roundIcon="@mipmap/ic_launcher_round"
+40-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:21:9-54
+41        android:supportsRtl="true"
+41-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:22:9-35
+42        android:theme="@style/Theme.QuickControl" >
+42-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:23:9-50
+43
+44        <!-- Main Activity -->
+45        <activity
+45-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:26:9-34:20
+46            android:name="com.quickcontrol.ui.MainActivity"
+46-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:27:13-44
+47            android:exported="true"
+47-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:28:13-36
+48            android:theme="@style/Theme.QuickControl" >
+48-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:29:13-54
+49            <intent-filter>
+49-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:30:13-33:29
+50                <action android:name="android.intent.action.MAIN" />
+50-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:31:17-69
+50-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:31:25-66
+51
+52                <category android:name="android.intent.category.LAUNCHER" />
+52-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:32:17-77
+52-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:32:27-74
+53            </intent-filter>
+54        </activity>
+55
+56        <!-- Settings Activity -->
+57        <activity
+57-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:37:9-41:54
+58            android:name="com.quickcontrol.ui.SettingsActivity"
+58-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:38:13-48
+59            android:exported="false"
+59-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:39:13-37
+60            android:label="@string/settings_title"
+60-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:41:13-51
+61            android:theme="@style/Theme.QuickControl" />
+61-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:40:13-54
+62
+63        <!-- Edge Panel Foreground Service -->
+64        <service
+64-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:44:9-47:58
+65            android:name="com.quickcontrol.service.EdgePanelService"
+65-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:45:13-53
+66            android:exported="false"
+66-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:46:13-37
+67            android:foregroundServiceType="specialUse" />
+67-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:47:13-55
+68
+69        <!-- Accessibility Service for Power Dialog -->
+70        <service
+70-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:50:9-60:19
+71            android:name="com.quickcontrol.service.PowerAccessibilityService"
+71-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:51:13-62
+72            android:exported="true"
+72-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:52:13-36
+73            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
+73-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:53:13-79
+74            <intent-filter>
+74-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:54:13-56:29
+75                <action android:name="android.accessibilityservice.AccessibilityService" />
+75-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:55:17-92
+75-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:55:25-89
+76            </intent-filter>
+77
+78            <meta-data
+78-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:57:13-59:72
+79                android:name="android.accessibilityservice"
+79-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:58:17-60
+80                android:resource="@xml/accessibility_service_config" />
+80-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:59:17-69
+81        </service>
+82
+83        <!-- Device Admin Receiver for Lock Screen -->
+84        <receiver
+84-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:63:9-73:20
+85            android:name="com.quickcontrol.receiver.QuickControlDeviceAdminReceiver"
+85-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:64:13-69
+86            android:exported="true"
+86-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:65:13-36
+87            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+87-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:66:13-70
+88            <meta-data
+88-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:67:13-69:65
+89                android:name="android.app.device_admin"
+89-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:68:17-56
+90                android:resource="@xml/device_admin_policies" />
+90-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:69:17-62
+91
+92            <intent-filter>
+92-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:70:13-72:29
+93                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+93-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:71:17-82
+93-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:71:25-79
+94            </intent-filter>
+95        </receiver>
+96
+97        <!-- Boot Receiver for auto-start -->
+98        <receiver
+98-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:76:9-82:20
+99            android:name="com.quickcontrol.receiver.BootReceiver"
+99-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:77:13-50
+100            android:exported="true" >
+100-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:78:13-36
+101            <intent-filter>
+101-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:79:13-81:29
+102                <action android:name="android.intent.action.BOOT_COMPLETED" />
+102-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:80:17-79
+102-->C:\Users\X-Y\.gemini\antigravity-ide\scratch\QuickControl\app\src\main\AndroidManifest.xml:80:25-76
+103            </intent-filter>
+104        </receiver>
+105
+106        <provider
+106-->[androidx.emoji2:emoji2:1.3.0] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\bd6026f29ec1b71eb7a7dbedf96018a3\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+107            android:name="androidx.startup.InitializationProvider"
+107-->[androidx.emoji2:emoji2:1.3.0] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\bd6026f29ec1b71eb7a7dbedf96018a3\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:25:13-67
+108            android:authorities="com.quickcontrol.androidx-startup"
+108-->[androidx.emoji2:emoji2:1.3.0] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\bd6026f29ec1b71eb7a7dbedf96018a3\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:26:13-68
+109            android:exported="false" >
+109-->[androidx.emoji2:emoji2:1.3.0] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\bd6026f29ec1b71eb7a7dbedf96018a3\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:27:13-37
+110            <meta-data
+110-->[androidx.emoji2:emoji2:1.3.0] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\bd6026f29ec1b71eb7a7dbedf96018a3\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+111                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+111-->[androidx.emoji2:emoji2:1.3.0] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\bd6026f29ec1b71eb7a7dbedf96018a3\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:30:17-75
+112                android:value="androidx.startup" />
+112-->[androidx.emoji2:emoji2:1.3.0] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\bd6026f29ec1b71eb7a7dbedf96018a3\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:31:17-49
+113            <meta-data
+113-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\74b144f011c797ca85cc5d3956bd11fc\transformed\jetified-lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+114                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+114-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\74b144f011c797ca85cc5d3956bd11fc\transformed\jetified-lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+115                android:value="androidx.startup" />
+115-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\74b144f011c797ca85cc5d3956bd11fc\transformed\jetified-lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+116            <meta-data
+116-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+117                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+117-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+118                android:value="androidx.startup" />
+118-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+119        </provider>
+120
+121        <receiver
+121-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+122            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+122-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+123            android:directBootAware="false"
+123-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+124            android:enabled="true"
+124-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+125            android:exported="true"
+125-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+126            android:permission="android.permission.DUMP" >
+126-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+127            <intent-filter>
+127-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+128                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+128-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+128-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+129            </intent-filter>
+130            <intent-filter>
+130-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+131                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+131-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+131-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+132            </intent-filter>
+133            <intent-filter>
+133-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+134                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+134-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+134-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+135            </intent-filter>
+136            <intent-filter>
+136-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+137                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+137-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+137-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\X-Y\.gradle\caches\8.11.1\transforms\55e7438d47cbc2489ceb0e7ef1a5b3e3\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+138            </intent-filter>
+139        </receiver>
+140    </application>
+141
+142</manifest>
