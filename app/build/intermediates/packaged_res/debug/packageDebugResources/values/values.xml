@@ -29,7 +29,7 @@
     <string name="notification_channel_description">Shows when QuickControl edge panel is active</string>
     <string name="notification_channel_name">QuickControl Service</string>
     <string name="notification_stop">Stop QuickControl</string>
-    <string name="notification_text">Swipe from the left edge to access controls</string>
+    <string name="notification_text">Swipe inward from the edge to access controls</string>
     <string name="notification_title">QuickControl is active</string>
     <string name="open_settings">Settings</string>
     <string name="panel_title">QUICK CONTROL</string>
@@ -38,18 +38,24 @@
     <string name="power_no_permission">Enable Accessibility Service in app settings to use Power Menu</string>
     <string name="service_running">QuickControl is active</string>
     <string name="service_stopped">QuickControl is not running</string>
-    <string name="settings_about_text">QuickControl v1.0\nA simple utility to replace physical button controls.</string>
+    <string name="settings_about_text">QuickControl v1.0\nA fast, invisible edge gesture utility for essential device controls.</string>
     <string name="settings_about_title">About</string>
     <string name="settings_auto_start">Start on Boot</string>
     <string name="settings_auto_start_description">Automatically start QuickControl when your phone boots up</string>
     <string name="settings_battery_button">Open Battery Settings</string>
     <string name="settings_battery_description">To keep QuickControl available at all times, you may need to disable battery optimization for this app.\n\nOn OPPO/ColorOS devices:\n1. Go to Settings → Battery\n2. Find QuickControl\n3. Allow background activity\n4. Disable battery optimization\n\nThis prevents the system from stopping QuickControl in the background.</string>
     <string name="settings_battery_title">Battery Optimization</string>
-    <string name="settings_handle_opacity">Handle Opacity</string>
-    <string name="settings_opacity_high">High</string>
-    <string name="settings_opacity_low">Low</string>
-    <string name="settings_opacity_medium">Medium</string>
+    <string name="settings_edge_left">Left Edge (Default)</string>
+    <string name="settings_edge_position">Trigger Edge</string>
+    <string name="settings_edge_right">Right Edge</string>
+    <string name="settings_gesture_sensitivity">Gesture Sensitivity</string>
+    <string name="settings_indicator_invisible">Invisible (Default)</string>
+    <string name="settings_indicator_subtle">Subtle Hint</string>
+    <string name="settings_indicator_title">Trigger Indicator</string>
     <string name="settings_permissions_title">Permissions</string>
+    <string name="settings_sensitivity_high">High</string>
+    <string name="settings_sensitivity_low">Low</string>
+    <string name="settings_sensitivity_medium">Medium (Default)</string>
     <string name="settings_title">Settings</string>
     <string name="start_button">START QUICKCONTROL</string>
     <string name="step_accessibility_button">Enable Accessibility Service</string>
@@ -70,7 +76,7 @@
     <string name="unmuted">Unmuted</string>
     <string name="volume_down">Vol −</string>
     <string name="volume_up">Vol +</string>
-    <string name="welcome_description">QuickControl helps you access essential phone controls without physical buttons.\n\nA small handle on the left edge of your screen gives you instant access to volume, flashlight, screen lock, and more — from any app.</string>
+    <string name="welcome_description">QuickControl helps you access essential phone controls without physical buttons.\n\nAn invisible gesture trigger along the edge of your screen gives you instant access to volume, flashlight, screen lock, and more with a simple inward swipe.</string>
     <string name="welcome_title">Welcome to QuickControl</string>
     <style name="Theme.QuickControl" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>

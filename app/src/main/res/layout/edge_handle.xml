@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<View xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/edgeHandle"
-    android:layout_width="10dp"
-    android:layout_height="60dp"
-    android:background="@drawable/handle_shape" />
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edgeTriggerContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <!-- Optional subtle indicator (invisible by default) -->
+    <View
+        android:id="@+id/edgeIndicator"
+        android:layout_width="3dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center_vertical|start"
+        android:background="@drawable/edge_indicator_shape"
+        android:visibility="gone" />
+
+</FrameLayout>

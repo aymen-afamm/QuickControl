@@ -1,5 +1,8 @@
 package com.quickcontrol.service
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.app.Notification
 import android.app.NotificationChannel
@@ -10,13 +13,18 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.PixelFormat
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
@@ -34,9 +42,6 @@ class EdgePanelService : Service() {
         private const val TAG = "EdgePanelService"
         private const val NOTIFICATION_ID = 1001
         private const val CHANNEL_ID = "quickcontrol_channel"
-        private const val PREFS_NAME = "quickcontrol_prefs"
-        private const val KEY_HANDLE_Y = "handle_y"
-        private const val KEY_HANDLE_OPACITY = "handle_opacity"
         private const val ACTION_STOP = "com.quickcontrol.ACTION_STOP"
 
         var isRunning = false
@@ -49,20 +54,33 @@ class EdgePanelService : Service() {
     private lateinit var volumeManager: VolumeManager
     private lateinit var flashlightManager: FlashlightManager
 
-    private var handleView: View? = null
+    private val mainHandler = Handler(Looper.getMainLooper())
+    private var triggerView: View? = null
     private var panelView: View? = null
     private var isPanelOpen = false
+
+    private val prefsListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+        when (key) {
+            SettingsActivity.KEY_EDGE_POSITION,
+            SettingsActivity.KEY_GESTURE_SENSITIVITY,
+            SettingsActivity.KEY_EDGE_INDICATOR -> {
+                refreshEdgeTrigger()
+            }
+        }
+    }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onCreate() {
         super.onCreate()
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs = getSharedPreferences(SettingsActivity.PREFS_NAME, Context.MODE_PRIVATE)
         permissionManager = PermissionManager(this)
         volumeManager = VolumeManager(this)
         flashlightManager = FlashlightManager(this)
         isRunning = true
+
+        prefs.registerOnSharedPreferenceChangeListener(prefsListener)
         Log.d(TAG, "Service created")
     }
 
@@ -74,7 +92,7 @@ class EdgePanelService : Service() {
 
         createNotificationChannel()
         startForeground(NOTIFICATION_ID, createNotification())
-        showHandle()
+        showEdgeTrigger()
 
         return START_STICKY
     }
@@ -82,7 +100,8 @@ class EdgePanelService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         isRunning = false
-        removeHandle()
+        prefs.unregisterOnSharedPreferenceChangeListener(prefsListener)
+        removeEdgeTrigger()
         removePanel()
         flashlightManager.release()
         Log.d(TAG, "Service destroyed")
@@ -134,84 +153,126 @@ class EdgePanelService : Service() {
             .build()
     }
 
-    // --- Handle ---
+    // --- Invisible Edge Trigger Zone ---
 
-    private fun showHandle() {
-        if (handleView != null) return
+    private fun dpToPx(dp: Int): Int {
+        return (dp * resources.displayMetrics.density + 0.5f).toInt()
+    }
 
-        handleView = LayoutInflater.from(this).inflate(R.layout.edge_handle, null)
+    private fun showEdgeTrigger() {
+        if (triggerView != null) return
 
-        val opacity = when (prefs.getString(KEY_HANDLE_OPACITY, "medium")) {
-            "low" -> 0.3f
-            "medium" -> 0.5f
-            "high" -> 0.8f
-            else -> 0.5f
+        triggerView = LayoutInflater.from(this).inflate(R.layout.edge_handle, null)
+
+        val isRightEdge = prefs.getString(
+            SettingsActivity.KEY_EDGE_POSITION, SettingsActivity.EDGE_LEFT
+        ) == SettingsActivity.EDGE_RIGHT
+
+        val sensitivity = prefs.getString(
+            SettingsActivity.KEY_GESTURE_SENSITIVITY, SettingsActivity.SENSITIVITY_MEDIUM
+        )
+
+        val indicatorMode = prefs.getString(
+            SettingsActivity.KEY_EDGE_INDICATOR, SettingsActivity.INDICATOR_INVISIBLE
+        )
+
+        // Trigger width: Low=6dp, Medium=8dp, High=12dp
+        val triggerWidthDp = when (sensitivity) {
+            SettingsActivity.SENSITIVITY_LOW -> 6
+            SettingsActivity.SENSITIVITY_HIGH -> 12
+            else -> 8
         }
-        handleView?.alpha = opacity
+        val triggerWidthPx = dpToPx(triggerWidthDp)
 
-        val savedY = prefs.getInt(KEY_HANDLE_Y, 0)
+        // Configure optional visual hint indicator
+        val indicator = triggerView?.findViewById<View>(R.id.edgeIndicator)
+        if (indicatorMode == SettingsActivity.INDICATOR_SUBTLE) {
+            indicator?.visibility = View.VISIBLE
+            val lp = indicator?.layoutParams as? FrameLayout.LayoutParams
+            if (lp != null) {
+                lp.gravity = Gravity.CENTER_VERTICAL or (if (isRightEdge) Gravity.END else Gravity.START)
+                indicator.layoutParams = lp
+            }
+        } else {
+            indicator?.visibility = View.GONE
+        }
+
+        val edgeGravity = if (isRightEdge) (Gravity.END or Gravity.TOP) else (Gravity.START or Gravity.TOP)
 
         val params = WindowManager.LayoutParams(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT,
+            triggerWidthPx,
+            WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
+                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
             PixelFormat.TRANSLUCENT
         ).apply {
-            gravity = Gravity.START or Gravity.CENTER_VERTICAL
+            gravity = edgeGravity
             x = 0
-            y = savedY
+            y = 0
         }
 
-        setupHandleTouch(params)
+        setupTriggerGesture(isRightEdge, sensitivity)
 
         try {
-            windowManager.addView(handleView, params)
+            windowManager.addView(triggerView, params)
+            Log.d(TAG, "Edge trigger mounted (right=$isRightEdge, width=${triggerWidthDp}dp)")
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to add handle view", e)
+            Log.e(TAG, "Failed to add edge trigger view", e)
         }
     }
 
-    private fun setupHandleTouch(params: WindowManager.LayoutParams) {
-        var initialY = 0
-        var initialTouchY = 0f
-        var isDragging = false
-        var startTime = 0L
+    private fun setupTriggerGesture(isRightEdge: Boolean, sensitivity: String?) {
+        // Swipe distance threshold to trigger panel open
+        val swipeThresholdDp = when (sensitivity) {
+            SettingsActivity.SENSITIVITY_LOW -> 40
+            SettingsActivity.SENSITIVITY_HIGH -> 20
+            else -> 28
+        }
+        val swipeThresholdPx = dpToPx(swipeThresholdDp)
 
-        handleView?.setOnTouchListener { _, event ->
-            when (event.action) {
+        var startX = 0f
+        var startY = 0f
+        var isSwipeTriggered = false
+
+        triggerView?.setOnTouchListener { _, event ->
+            if (isPanelOpen) return@setOnTouchListener false
+
+            when (event.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
-                    initialY = params.y
-                    initialTouchY = event.rawY
-                    isDragging = false
-                    startTime = System.currentTimeMillis()
+                    startX = event.rawX
+                    startY = event.rawY
+                    isSwipeTriggered = false
+                    Log.d(TAG, "Touch DOWN at ($startX, $startY)")
                     true
                 }
 
                 MotionEvent.ACTION_MOVE -> {
-                    val deltaY = event.rawY - initialTouchY
-                    if (Math.abs(deltaY) > 10) {
-                        isDragging = true
+                    if (isSwipeTriggered) return@setOnTouchListener true
+
+                    val currentX = event.rawX
+                    val currentY = event.rawY
+                    val deltaX = if (isRightEdge) (startX - currentX) else (currentX - startX)
+                    val deltaY = Math.abs(currentY - startY)
+                    Log.d(TAG, "Touch MOVE: cur=($currentX, $currentY), deltaX=$deltaX, deltaY=$deltaY, thresh=$swipeThresholdPx")
+
+                    // Horizontal inward swipe criteria:
+                    // 1. Inward movement reaches threshold
+                    // 2. Horizontal displacement exceeds vertical displacement (prioritizes horizontal swipe)
+                    if (deltaX >= swipeThresholdPx && deltaX > deltaY) {
+                        isSwipeTriggered = true
+                        Log.d(TAG, "SWIPE TRIGGERED! Opening panel...")
+                        openPanel()
+                        true
+                    } else {
+                        true
                     }
-                    params.y = initialY + deltaY.toInt()
-                    try {
-                        windowManager.updateViewLayout(handleView, params)
-                    } catch (e: Exception) {
-                        Log.e(TAG, "Failed to update handle layout", e)
-                    }
-                    true
                 }
 
-                MotionEvent.ACTION_UP -> {
-                    val elapsed = System.currentTimeMillis() - startTime
-                    if (!isDragging && elapsed < 300) {
-                        // Tap — toggle panel
-                        togglePanel()
-                    } else {
-                        // Save position after drag
-                        prefs.edit().putInt(KEY_HANDLE_Y, params.y).apply()
-                    }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    Log.d(TAG, "Touch UP/CANCEL: isSwipeTriggered=$isSwipeTriggered")
+                    isSwipeTriggered = false
                     true
                 }
 
@@ -220,31 +281,49 @@ class EdgePanelService : Service() {
         }
     }
 
-    private fun removeHandle() {
-        handleView?.let {
+    private fun removeEdgeTrigger() {
+        triggerView?.let {
             try {
                 windowManager.removeView(it)
             } catch (e: Exception) {
-                Log.e(TAG, "Failed to remove handle", e)
+                Log.e(TAG, "Failed to remove edge trigger view", e)
             }
         }
-        handleView = null
+        triggerView = null
     }
 
-    // --- Panel ---
-
-    private fun togglePanel() {
-        if (isPanelOpen) {
-            closePanel()
-        } else {
-            openPanel()
+    private fun refreshEdgeTrigger() {
+        mainHandler.post {
+            removeEdgeTrigger()
+            showEdgeTrigger()
         }
     }
 
+    // --- Control Panel ---
+
     private fun openPanel() {
-        if (panelView != null) return
+        if (panelView != null || isPanelOpen) return
 
         panelView = LayoutInflater.from(this).inflate(R.layout.edge_panel, null)
+
+        val isRightEdge = prefs.getString(
+            SettingsActivity.KEY_EDGE_POSITION, SettingsActivity.EDGE_LEFT
+        ) == SettingsActivity.EDGE_RIGHT
+
+        val container = panelView?.findViewById<LinearLayout>(R.id.panelContainer)
+        val scrim = panelView?.findViewById<View>(R.id.panelScrim)
+
+        // Align container to Left or Right side
+        val containerParams = container?.layoutParams as? FrameLayout.LayoutParams
+        if (containerParams != null) {
+            containerParams.gravity = if (isRightEdge) Gravity.END else Gravity.START
+            container.layoutParams = containerParams
+        }
+
+        val panelWidthPx = 260f * resources.displayMetrics.density
+        val initialTranslationX = if (isRightEdge) panelWidthPx else -panelWidthPx
+        container?.translationX = initialTranslationX
+        scrim?.alpha = 0f
 
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
@@ -260,12 +339,17 @@ class EdgePanelService : Service() {
             windowManager.addView(panelView, params)
             isPanelOpen = true
 
-            // Slide-in animation
-            val container = panelView?.findViewById<LinearLayout>(R.id.panelContainer)
-            container?.let {
-                ObjectAnimator.ofFloat(it, "translationX", -260f * resources.displayMetrics.density, 0f)
-                    .setDuration(250)
-                    .start()
+            // Smooth slide-in and scrim fade-in
+            val slideAnim = ObjectAnimator.ofFloat(container, "translationX", initialTranslationX, 0f).apply {
+                duration = 240
+                interpolator = DecelerateInterpolator()
+            }
+            val scrimAnim = ObjectAnimator.ofFloat(scrim, "alpha", 0f, 1f).apply {
+                duration = 240
+            }
+            AnimatorSet().apply {
+                playTogether(slideAnim, scrimAnim)
+                start()
             }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to add panel view", e)
@@ -273,18 +357,34 @@ class EdgePanelService : Service() {
     }
 
     private fun closePanel() {
+        if (!isPanelOpen || panelView == null) return
+
+        val isRightEdge = prefs.getString(
+            SettingsActivity.KEY_EDGE_POSITION, SettingsActivity.EDGE_LEFT
+        ) == SettingsActivity.EDGE_RIGHT
+
         val container = panelView?.findViewById<LinearLayout>(R.id.panelContainer)
-        if (container != null) {
-            val animator = ObjectAnimator.ofFloat(
-                container, "translationX", 0f, -260f * resources.displayMetrics.density
-            )
-            animator.duration = 200
-            animator.addListener(object : android.animation.AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: android.animation.Animator) {
-                    removePanel()
-                }
-            })
-            animator.start()
+        val scrim = panelView?.findViewById<View>(R.id.panelScrim)
+        val panelWidthPx = 260f * resources.displayMetrics.density
+        val targetTranslationX = if (isRightEdge) panelWidthPx else -panelWidthPx
+
+        if (container != null && scrim != null) {
+            val slideAnim = ObjectAnimator.ofFloat(container, "translationX", 0f, targetTranslationX).apply {
+                duration = 200
+                interpolator = AccelerateInterpolator()
+            }
+            val scrimAnim = ObjectAnimator.ofFloat(scrim, "alpha", 1f, 0f).apply {
+                duration = 200
+            }
+            AnimatorSet().apply {
+                playTogether(slideAnim, scrimAnim)
+                addListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        removePanel()
+                    }
+                })
+                start()
+            }
         } else {
             removePanel()
         }
@@ -295,7 +395,7 @@ class EdgePanelService : Service() {
             try {
                 windowManager.removeView(it)
             } catch (e: Exception) {
-                Log.e(TAG, "Failed to remove panel", e)
+                Log.e(TAG, "Failed to remove panel view", e)
             }
         }
         panelView = null
@@ -314,8 +414,7 @@ class EdgePanelService : Service() {
         panel.findViewById<View>(R.id.btnLockScreen)?.setOnClickListener {
             if (permissionManager.isDeviceAdminActive()) {
                 closePanel()
-                // Small delay so panel closes before screen locks
-                handleView?.postDelayed({
+                mainHandler.postDelayed({
                     permissionManager.lockScreen()
                 }, 300)
             } else {
@@ -327,7 +426,7 @@ class EdgePanelService : Service() {
         panel.findViewById<View>(R.id.btnPowerMenu)?.setOnClickListener {
             if (permissionManager.isAccessibilityServiceEnabled()) {
                 closePanel()
-                handleView?.postDelayed({
+                mainHandler.postDelayed({
                     permissionManager.showPowerDialog()
                 }, 300)
             } else {
@@ -383,7 +482,6 @@ class EdgePanelService : Service() {
                 }
             }
         }
-        // Set initial flashlight text
         if (flashlightManager.isFlashlightOn()) {
             flashlightText?.text = getString(R.string.flashlight_on)
         }

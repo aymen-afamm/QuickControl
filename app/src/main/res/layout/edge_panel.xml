@@ -20,8 +20,7 @@
         android:paddingTop="24dp"
         android:paddingBottom="24dp"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:translationX="-260dp">
+        android:paddingEnd="16dp">
 
         <!-- Title -->
         <TextView

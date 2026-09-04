@@ -13,9 +13,21 @@ import com.quickcontrol.manager.PermissionManager
 class SettingsActivity : AppCompatActivity() {
 
     companion object {
-        private const val PREFS_NAME = "quickcontrol_prefs"
-        private const val KEY_HANDLE_OPACITY = "handle_opacity"
-        private const val KEY_AUTO_START = "auto_start"
+        const val PREFS_NAME = "quickcontrol_prefs"
+        const val KEY_EDGE_POSITION = "edge_position"
+        const val KEY_GESTURE_SENSITIVITY = "gesture_sensitivity"
+        const val KEY_EDGE_INDICATOR = "edge_indicator"
+        const val KEY_AUTO_START = "auto_start"
+
+        const val EDGE_LEFT = "left"
+        const val EDGE_RIGHT = "right"
+
+        const val SENSITIVITY_LOW = "low"
+        const val SENSITIVITY_MEDIUM = "medium"
+        const val SENSITIVITY_HIGH = "high"
+
+        const val INDICATOR_INVISIBLE = "invisible"
+        const val INDICATOR_SUBTLE = "subtle"
     }
 
     private lateinit var prefs: SharedPreferences
@@ -28,30 +40,63 @@ class SettingsActivity : AppCompatActivity() {
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         permissionManager = PermissionManager(this)
 
-        setupOpacity()
+        setupEdgePosition()
+        setupSensitivity()
+        setupIndicator()
         setupAutoStart()
         setupBattery()
         setupPermissions()
     }
 
-    private fun setupOpacity() {
-        val opacityGroup = findViewById<RadioGroup>(R.id.opacityGroup)
-        val currentOpacity = prefs.getString(KEY_HANDLE_OPACITY, "medium")
+    private fun setupEdgePosition() {
+        val positionGroup = findViewById<RadioGroup>(R.id.edgePositionGroup)
+        val currentPosition = prefs.getString(KEY_EDGE_POSITION, EDGE_LEFT)
 
-        when (currentOpacity) {
-            "low" -> findViewById<RadioButton>(R.id.opacityLow).isChecked = true
-            "medium" -> findViewById<RadioButton>(R.id.opacityMedium).isChecked = true
-            "high" -> findViewById<RadioButton>(R.id.opacityHigh).isChecked = true
+        if (currentPosition == EDGE_RIGHT) {
+            findViewById<RadioButton>(R.id.radioEdgeRight).isChecked = true
+        } else {
+            findViewById<RadioButton>(R.id.radioEdgeLeft).isChecked = true
         }
 
-        opacityGroup.setOnCheckedChangeListener { _, checkedId ->
-            val opacity = when (checkedId) {
-                R.id.opacityLow -> "low"
-                R.id.opacityMedium -> "medium"
-                R.id.opacityHigh -> "high"
-                else -> "medium"
+        positionGroup.setOnCheckedChangeListener { _, checkedId ->
+            val position = if (checkedId == R.id.radioEdgeRight) EDGE_RIGHT else EDGE_LEFT
+            prefs.edit().putString(KEY_EDGE_POSITION, position).apply()
+        }
+    }
+
+    private fun setupSensitivity() {
+        val sensitivityGroup = findViewById<RadioGroup>(R.id.sensitivityGroup)
+        val currentSensitivity = prefs.getString(KEY_GESTURE_SENSITIVITY, SENSITIVITY_MEDIUM)
+
+        when (currentSensitivity) {
+            SENSITIVITY_LOW -> findViewById<RadioButton>(R.id.radioSensLow).isChecked = true
+            SENSITIVITY_HIGH -> findViewById<RadioButton>(R.id.radioSensHigh).isChecked = true
+            else -> findViewById<RadioButton>(R.id.radioSensMedium).isChecked = true
+        }
+
+        sensitivityGroup.setOnCheckedChangeListener { _, checkedId ->
+            val sensitivity = when (checkedId) {
+                R.id.radioSensLow -> SENSITIVITY_LOW
+                R.id.radioSensHigh -> SENSITIVITY_HIGH
+                else -> SENSITIVITY_MEDIUM
             }
-            prefs.edit().putString(KEY_HANDLE_OPACITY, opacity).apply()
+            prefs.edit().putString(KEY_GESTURE_SENSITIVITY, sensitivity).apply()
+        }
+    }
+
+    private fun setupIndicator() {
+        val indicatorGroup = findViewById<RadioGroup>(R.id.indicatorGroup)
+        val currentIndicator = prefs.getString(KEY_EDGE_INDICATOR, INDICATOR_INVISIBLE)
+
+        if (currentIndicator == INDICATOR_SUBTLE) {
+            findViewById<RadioButton>(R.id.radioIndicatorSubtle).isChecked = true
+        } else {
+            findViewById<RadioButton>(R.id.radioIndicatorInvisible).isChecked = true
+        }
+
+        indicatorGroup.setOnCheckedChangeListener { _, checkedId ->
+            val indicator = if (checkedId == R.id.radioIndicatorSubtle) INDICATOR_SUBTLE else INDICATOR_INVISIBLE
+            prefs.edit().putString(KEY_EDGE_INDICATOR, indicator).apply()
         }
     }
 
