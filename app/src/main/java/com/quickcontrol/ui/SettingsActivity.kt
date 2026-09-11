@@ -2,13 +2,16 @@ package com.quickcontrol.ui
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Switch
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.quickcontrol.R
 import com.quickcontrol.manager.PermissionManager
+
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -32,6 +35,8 @@ class SettingsActivity : AppCompatActivity() {
 
     private lateinit var prefs: SharedPreferences
     private lateinit var permissionManager: PermissionManager
+    private var statusDeviceAdminBadge: TextView? = null
+    private var statusAccessibilityBadge: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +45,40 @@ class SettingsActivity : AppCompatActivity() {
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         permissionManager = PermissionManager(this)
 
+        findViewById<View>(R.id.btnBack)?.setOnClickListener {
+            finish()
+        }
+
+        statusDeviceAdminBadge = findViewById(R.id.statusDeviceAdminBadge)
+        statusAccessibilityBadge = findViewById(R.id.statusAccessibilityBadge)
+
         setupEdgePosition()
         setupSensitivity()
         setupIndicator()
         setupAutoStart()
         setupBattery()
         setupPermissions()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updatePermissionBadges()
+    }
+
+    private fun updatePermissionBadges() {
+        val hasAdmin = permissionManager.isDeviceAdminActive()
+        statusDeviceAdminBadge?.apply {
+            text = if (hasAdmin) getString(R.string.tag_granted) else getString(R.string.tag_not_granted)
+            setTextColor(getColor(if (hasAdmin) R.color.success else R.color.secondary_text))
+            setBackgroundResource(if (hasAdmin) R.drawable.badge_granted else R.drawable.badge_optional)
+        }
+
+        val hasAccessibility = permissionManager.isAccessibilityServiceEnabled()
+        statusAccessibilityBadge?.apply {
+            text = if (hasAccessibility) getString(R.string.tag_granted) else getString(R.string.tag_not_granted)
+            setTextColor(getColor(if (hasAccessibility) R.color.success else R.color.secondary_text))
+            setBackgroundResource(if (hasAccessibility) R.drawable.badge_granted else R.drawable.badge_optional)
+        }
     }
 
     private fun setupEdgePosition() {

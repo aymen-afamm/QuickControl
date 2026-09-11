@@ -25,6 +25,7 @@ import android.view.WindowManager
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
@@ -35,6 +36,7 @@ import com.quickcontrol.manager.PermissionManager
 import com.quickcontrol.manager.VolumeManager
 import com.quickcontrol.ui.MainActivity
 import com.quickcontrol.ui.SettingsActivity
+
 
 class EdgePanelService : Service() {
 
@@ -320,7 +322,7 @@ class EdgePanelService : Service() {
             container.layoutParams = containerParams
         }
 
-        val panelWidthPx = 260f * resources.displayMetrics.density
+        val panelWidthPx = 268f * resources.displayMetrics.density
         val initialTranslationX = if (isRightEdge) panelWidthPx else -panelWidthPx
         container?.translationX = initialTranslationX
         scrim?.alpha = 0f
@@ -365,7 +367,7 @@ class EdgePanelService : Service() {
 
         val container = panelView?.findViewById<LinearLayout>(R.id.panelContainer)
         val scrim = panelView?.findViewById<View>(R.id.panelScrim)
-        val panelWidthPx = 260f * resources.displayMetrics.density
+        val panelWidthPx = 268f * resources.displayMetrics.density
         val targetTranslationX = if (isRightEdge) panelWidthPx else -panelWidthPx
 
         if (container != null && scrim != null) {
@@ -453,7 +455,6 @@ class EdgePanelService : Service() {
             volumeManager.setupSeekBar(seekBar) { level ->
                 volumeLevel.text = level.toString()
             }
-            volumeLevel.text = volumeManager.currentVolume.toString()
         }
 
         // Mute
@@ -464,27 +465,42 @@ class EdgePanelService : Service() {
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }
 
-        // Flashlight
+        // Initial volume UI state
+        updateVolumeUI()
+
+        // Flashlight with active visual indicator
+        val btnFlashlight = panel.findViewById<View>(R.id.btnFlashlight)
+        val flashlightIcon = panel.findViewById<ImageView>(R.id.flashlightIcon)
         val flashlightText = panel.findViewById<TextView>(R.id.flashlightText)
-        panel.findViewById<View>(R.id.btnFlashlight)?.setOnClickListener {
+
+        fun updateFlashlightUI(isOn: Boolean) {
+            flashlightText?.post {
+                if (isOn) {
+                    btnFlashlight?.setBackgroundResource(R.drawable.button_flashlight_active)
+                    flashlightIcon?.setColorFilter(getColor(R.color.primary))
+                    flashlightText.setTextColor(getColor(R.color.primary))
+                    flashlightText.text = getString(R.string.flashlight_on)
+                } else {
+                    btnFlashlight?.setBackgroundResource(R.drawable.button_background)
+                    flashlightIcon?.setColorFilter(getColor(R.color.primary_text))
+                    flashlightText.setTextColor(getColor(R.color.primary_text))
+                    flashlightText.text = getString(R.string.flashlight)
+                }
+            }
+        }
+
+        btnFlashlight?.setOnClickListener {
             if (flashlightManager.isAvailable()) {
                 flashlightManager.toggle()
             } else {
                 Toast.makeText(this, R.string.flashlight_not_available, Toast.LENGTH_SHORT).show()
             }
         }
+
         flashlightManager.setOnStateChangedListener { isOn ->
-            flashlightText?.post {
-                flashlightText.text = if (isOn) {
-                    getString(R.string.flashlight_on)
-                } else {
-                    getString(R.string.flashlight)
-                }
-            }
+            updateFlashlightUI(isOn)
         }
-        if (flashlightManager.isFlashlightOn()) {
-            flashlightText?.text = getString(R.string.flashlight_on)
-        }
+        updateFlashlightUI(flashlightManager.isFlashlightOn())
 
         // Settings
         panel.findViewById<View>(R.id.btnOpenSettings)?.setOnClickListener {
@@ -499,7 +515,25 @@ class EdgePanelService : Service() {
         val panel = panelView ?: return
         val seekBar = panel.findViewById<SeekBar>(R.id.volumeSeekBar)
         val volumeLevel = panel.findViewById<TextView>(R.id.volumeLevel)
-        seekBar?.progress = volumeManager.currentVolume
-        volumeLevel?.text = volumeManager.currentVolume.toString()
+        val btnMute = panel.findViewById<View>(R.id.btnMute)
+        val muteIcon = panel.findViewById<ImageView>(R.id.muteIcon)
+        val muteText = panel.findViewById<TextView>(R.id.muteText)
+
+        val currentVol = volumeManager.currentVolume
+        seekBar?.progress = currentVol
+        volumeLevel?.text = currentVol.toString()
+
+        val isMuted = volumeManager.isMuted
+        if (isMuted) {
+            btnMute?.setBackgroundResource(R.drawable.button_flashlight_active)
+            muteIcon?.setColorFilter(getColor(R.color.primary))
+            muteText?.setTextColor(getColor(R.color.primary))
+            muteText?.text = getString(R.string.muted)
+        } else {
+            btnMute?.setBackgroundResource(R.drawable.button_background)
+            muteIcon?.setColorFilter(getColor(R.color.primary_text))
+            muteText?.setTextColor(getColor(R.color.primary_text))
+            muteText?.text = getString(R.string.mute)
+        }
     }
 }

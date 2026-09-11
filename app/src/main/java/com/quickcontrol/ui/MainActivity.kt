@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var statusDot: View
     private lateinit var statusText: TextView
+    private lateinit var statusDesc: TextView
     private lateinit var overlayStatus: TextView
     private lateinit var lockStatus: TextView
     private lateinit var accessibilityStatus: TextView
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         statusDot = findViewById(R.id.statusDot)
         statusText = findViewById(R.id.statusText)
+        statusDesc = findViewById(R.id.statusDesc)
         overlayStatus = findViewById(R.id.overlayStatus)
         lockStatus = findViewById(R.id.lockStatus)
         accessibilityStatus = findViewById(R.id.accessibilityStatus)
@@ -89,33 +91,40 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        // Service status
         val running = EdgePanelService.isRunning
-        statusDot.setBackgroundColor(
-            if (running) getColor(R.color.success) else getColor(R.color.error)
-        )
-        statusText.text = if (running) {
-            getString(R.string.service_running)
+        val hasOverlay = permissionManager.canDrawOverlays()
+
+        // Service status dot and texts
+        if (running) {
+            statusDot.setBackgroundResource(R.drawable.status_dot_active)
+            statusText.text = getString(R.string.service_running)
+            statusDesc.text = getString(R.string.service_running_desc)
+            btnStart.text = getString(R.string.stop_button)
+            btnStart.setBackgroundResource(R.drawable.button_stop)
+            btnStart.setTextColor(getColor(R.color.error))
         } else {
-            getString(R.string.service_stopped)
-        }
-        btnStart.text = if (running) {
-            getString(R.string.stop_button)
-        } else {
-            getString(R.string.start_button)
+            statusDot.setBackgroundResource(R.drawable.status_dot_inactive)
+            statusText.text = getString(R.string.service_stopped)
+            statusDesc.text = if (hasOverlay) {
+                getString(R.string.service_stopped_desc)
+            } else {
+                getString(R.string.service_need_overlay_desc)
+            }
+            btnStart.text = getString(R.string.start_button)
+            btnStart.setBackgroundResource(R.drawable.button_primary)
+            btnStart.setTextColor(getColor(R.color.text_on_primary))
         }
 
-        // Overlay
-        val hasOverlay = permissionManager.canDrawOverlays()
+        // Overlay step
         overlayStatus.visibility = if (hasOverlay) View.VISIBLE else View.GONE
         btnOverlay.visibility = if (hasOverlay) View.GONE else View.VISIBLE
 
-        // Device admin
+        // Device admin step
         val hasAdmin = permissionManager.isDeviceAdminActive()
         lockStatus.visibility = if (hasAdmin) View.VISIBLE else View.GONE
         btnLock.visibility = if (hasAdmin) View.GONE else View.VISIBLE
 
-        // Accessibility
+        // Accessibility step
         val hasAccessibility = permissionManager.isAccessibilityServiceEnabled()
         accessibilityStatus.visibility = if (hasAccessibility) View.VISIBLE else View.GONE
         btnAccessibility.visibility = if (hasAccessibility) View.GONE else View.VISIBLE

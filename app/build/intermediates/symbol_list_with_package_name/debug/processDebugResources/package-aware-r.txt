@@ -1275,6 +1275,7 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color badge_neutral
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -1287,10 +1288,13 @@ color button_material_light
 color button_pressed
 color call_notification_answer_color
 color call_notification_decline_color
+color card_stroke
+color card_stroke_active
 color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
+color chip_text_selector
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -1335,8 +1339,10 @@ color dim_foreground_material_dark
 color dim_foreground_material_light
 color divider
 color error
+color error_border
 color error_color_material_dark
 color error_color_material_light
+color error_surface
 color foreground_material_dark
 color foreground_material_light
 color handle_color
@@ -2009,8 +2015,11 @@ color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
+color primary_variant
+color ripple_light
 color ripple_material_dark
 color ripple_material_light
+color ripple_primary
 color scrim
 color secondary_text
 color secondary_text_default_material_dark
@@ -2018,7 +2027,11 @@ color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
 color success
+color success_border
+color success_surface
 color surface
+color surface_active
+color surface_card
 color surface_elevated
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
@@ -2026,9 +2039,12 @@ color switch_thumb_material_dark
 color switch_thumb_material_light
 color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
+color tertiary_text
+color text_on_primary
 color tooltip_background_dark
 color tooltip_background_light
 color warning
+color warning_surface
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
 dimen abc_action_bar_default_height_material
@@ -2913,6 +2929,9 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable badge_granted
+drawable badge_optional
+drawable badge_required
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -2922,8 +2941,12 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable button_background
+drawable button_flashlight_active
 drawable button_primary
+drawable button_secondary
+drawable button_stop
 drawable card_background
+drawable chip_option_selector
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -2931,6 +2954,7 @@ drawable design_password_eye
 drawable design_snackbar_background
 drawable edge_indicator_shape
 drawable handle_shape
+drawable ic_arrow_back
 drawable ic_arrow_back_black_24
 drawable ic_call_answer
 drawable ic_call_answer_low
@@ -2938,6 +2962,7 @@ drawable ic_call_answer_video
 drawable ic_call_answer_video_low
 drawable ic_call_decline
 drawable ic_call_decline_low
+drawable ic_check
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
 drawable ic_flashlight
@@ -3030,6 +3055,8 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable panel_background
+drawable status_dot_active
+drawable status_dot_inactive
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -3123,6 +3150,7 @@ id blocking
 id bottom
 id bounce
 id btnAccessibility
+id btnBack
 id btnBattery
 id btnFlashlight
 id btnLock
@@ -3453,6 +3481,9 @@ id startToEnd
 id startVertical
 id staticLayout
 id staticPostLayout
+id statusAccessibilityBadge
+id statusDesc
+id statusDeviceAdminBadge
 id statusDot
 id statusText
 id stepAccessibility
@@ -3761,6 +3792,7 @@ string abc_toolbar_collapse_description
 string accessibility_service_description
 string androidx_startup
 string app_name
+string app_tagline
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
 string bottomsheet_action_collapse
@@ -3768,6 +3800,7 @@ string bottomsheet_action_expand
 string bottomsheet_action_expand_halfway
 string bottomsheet_drag_handle_clicked
 string bottomsheet_drag_handle_content_description
+string btn_back_description
 string call_notification_answer_action
 string call_notification_answer_video_action
 string call_notification_decline_action
@@ -3915,8 +3948,11 @@ string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
 string searchview_navigation_content_description
+string service_need_overlay_desc
 string service_running
+string service_running_desc
 string service_stopped
+string service_stopped_desc
 string settings_about_text
 string settings_about_title
 string settings_auto_start
@@ -3955,6 +3991,10 @@ string step_overlay_description
 string step_overlay_granted
 string step_overlay_title
 string stop_button
+string tag_granted
+string tag_not_granted
+string tag_optional
+string tag_required
 string unmuted
 string volume_down
 string volume_up

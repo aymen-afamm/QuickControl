@@ -3,25 +3,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:overScrollMode="ifContentScrolls">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="24dp">
 
-        <!-- Header -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/settings_title"
-            android:textColor="@color/primary"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp" />
+        <!-- Top App Bar with Back Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
 
-        <!-- Trigger Edge -->
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/button_background"
+                android:contentDescription="@string/btn_back_description"
+                android:src="@drawable/ic_arrow_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:text="@string/settings_title"
+                android:textColor="@color/primary_text"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Section: Trigger Edge Position -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,37 +55,55 @@
                 android:layout_height="wrap_content"
                 android:text="@string/settings_edge_position"
                 android:textColor="@color/primary_text"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                android:text="Select which screen side activates the gesture panel"
+                android:textColor="@color/secondary_text"
+                android:textSize="12sp" />
 
             <RadioGroup
                 android:id="@+id/edgePositionGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/radioEdgeLeft"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/chip_option_selector"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="@string/settings_edge_left"
-                    android:textColor="@color/secondary_text"
-                    android:buttonTint="@color/primary" />
+                    android:textColor="@color/chip_text_selector"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioEdgeRight"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/chip_option_selector"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="@string/settings_edge_right"
-                    android:textColor="@color/secondary_text"
-                    android:buttonTint="@color/primary" />
+                    android:textColor="@color/chip_text_selector"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
             </RadioGroup>
         </LinearLayout>
 
-        <!-- Gesture Sensitivity -->
+        <!-- Section: Gesture Sensitivity -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,46 +117,70 @@
                 android:layout_height="wrap_content"
                 android:text="@string/settings_gesture_sensitivity"
                 android:textColor="@color/primary_text"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                android:text="Adjust swipe distance required to trigger controls"
+                android:textColor="@color/secondary_text"
+                android:textSize="12sp" />
 
             <RadioGroup
                 android:id="@+id/sensitivityGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/radioSensLow"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/chip_option_selector"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="@string/settings_sensitivity_low"
-                    android:textColor="@color/secondary_text"
-                    android:buttonTint="@color/primary" />
+                    android:textColor="@color/chip_text_selector"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioSensMedium"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:background="@drawable/chip_option_selector"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="@string/settings_sensitivity_medium"
-                    android:textColor="@color/secondary_text"
-                    android:buttonTint="@color/primary" />
+                    android:textColor="@color/chip_text_selector"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioSensHigh"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:background="@drawable/chip_option_selector"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="@string/settings_sensitivity_high"
-                    android:textColor="@color/secondary_text"
-                    android:buttonTint="@color/primary" />
+                    android:textColor="@color/chip_text_selector"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
             </RadioGroup>
         </LinearLayout>
 
-        <!-- Trigger Indicator -->
+        <!-- Section: Trigger Indicator -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,37 +194,55 @@
                 android:layout_height="wrap_content"
                 android:text="@string/settings_indicator_title"
                 android:textColor="@color/primary_text"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                android:text="Choose between fully invisible trigger or a subtle edge line"
+                android:textColor="@color/secondary_text"
+                android:textSize="12sp" />
 
             <RadioGroup
                 android:id="@+id/indicatorGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/radioIndicatorInvisible"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/chip_option_selector"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="@string/settings_indicator_invisible"
-                    android:textColor="@color/secondary_text"
-                    android:buttonTint="@color/primary" />
+                    android:textColor="@color/chip_text_selector"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioIndicatorSubtle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/chip_option_selector"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="@string/settings_indicator_subtle"
-                    android:textColor="@color/secondary_text"
-                    android:buttonTint="@color/primary" />
+                    android:textColor="@color/chip_text_selector"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
             </RadioGroup>
         </LinearLayout>
 
-        <!-- Auto-start -->
+        <!-- Section: Auto-start -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -183,13 +263,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/settings_auto_start"
                     android:textColor="@color/primary_text"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     android:text="@string/settings_auto_start_description"
                     android:textColor="@color/secondary_text"
                     android:textSize="12sp" />
@@ -200,10 +280,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:thumbTint="@color/primary"
-                android:trackTint="@color/divider" />
+                android:trackTint="@color/button_pressed" />
         </LinearLayout>
 
-        <!-- Battery Optimization -->
+        <!-- Section: Battery Optimization -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -217,7 +297,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/settings_battery_title"
                 android:textColor="@color/primary_text"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -227,21 +307,23 @@
                 android:text="@string/settings_battery_description"
                 android:textColor="@color/secondary_text"
                 android:textSize="12sp"
-                android:lineSpacingMultiplier="1.4" />
+                android:lineSpacingMultiplier="1.3" />
 
             <Button
                 android:id="@+id/btnBattery"
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/button_background"
+                android:backgroundTint="@null"
                 android:text="@string/settings_battery_button"
                 android:textColor="@color/primary"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 android:textAllCaps="false" />
         </LinearLayout>
 
-        <!-- Permissions Section -->
+        <!-- Section: Permissions -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -255,57 +337,120 @@
                 android:layout_height="wrap_content"
                 android:text="@string/settings_permissions_title"
                 android:textColor="@color/primary_text"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="12dp"
+                android:text="Configure optional system integrations"
+                android:textColor="@color/secondary_text"
+                android:textSize="12sp" />
+
+            <!-- Device Admin Item -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/step_lock_title"
+                    android:textColor="@color/primary_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/statusDeviceAdminBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/badge_optional"
+                    android:text="@string/tag_not_granted"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnSetupDeviceAdmin"
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="12dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/button_background"
+                android:backgroundTint="@null"
                 android:text="@string/step_lock_button"
-                android:textColor="@color/primary"
+                android:textColor="@color/primary_text"
                 android:textSize="14sp"
                 android:textAllCaps="false" />
+
+            <!-- Accessibility Item -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/step_accessibility_title"
+                    android:textColor="@color/primary_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/statusAccessibilityBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/badge_optional"
+                    android:text="@string/tag_not_granted"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnSetupAccessibility"
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="48dp"
                 android:background="@drawable/button_background"
+                android:backgroundTint="@null"
                 android:text="@string/step_accessibility_button"
-                android:textColor="@color/primary"
+                android:textColor="@color/primary_text"
                 android:textSize="14sp"
                 android:textAllCaps="false" />
         </LinearLayout>
 
-        <!-- About -->
+        <!-- Section: About -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/card_background"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp">
+            android:padding="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/settings_about_title"
                 android:textColor="@color/primary_text"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:text="@string/settings_about_text"
                 android:textColor="@color/secondary_text"
                 android:textSize="13sp"
-                android:lineSpacingMultiplier="1.4" />
+                android:lineSpacingMultiplier="1.3" />
         </LinearLayout>
 
     </LinearLayout>

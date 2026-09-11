@@ -3,25 +3,35 @@
     <string name="app_name">QuickControl</string>
 
     <!-- Main Activity -->
+    <string name="app_tagline">Screen Edge Device Utility</string>
     <string name="welcome_title">Welcome to QuickControl</string>
-    <string name="welcome_description">QuickControl helps you access essential phone controls without physical buttons.\n\nAn invisible gesture trigger along the edge of your screen gives you instant access to volume, flashlight, screen lock, and more with a simple inward swipe.</string>
+    <string name="welcome_description">QuickControl gives you immediate access to essential phone controls without physical buttons. Swipe inward from your screen edge anytime to access volume, flashlight, screen lock, and power options.</string>
+    <string name="tag_required">REQUIRED</string>
+    <string name="tag_optional">OPTIONAL</string>
+    <string name="tag_granted">Active</string>
+    <string name="tag_not_granted">Not Set</string>
+    <string name="service_running_desc">Edge trigger active • Swipe screen edge</string>
+    <string name="service_stopped_desc">Service idle • Tap Start below to activate</string>
+    <string name="service_need_overlay_desc">Grant overlay permission first to start</string>
+    <string name="btn_back_description">Go back</string>
 
     <!-- Permission Steps -->
-    <string name="step_overlay_title">Step 1: Display Over Other Apps</string>
+    <string name="step_overlay_title">Display Over Other Apps</string>
     <string name="step_overlay_description">QuickControl needs permission to appear over other apps so the Edge Panel can be accessed from anywhere.</string>
     <string name="step_overlay_button">Grant Overlay Permission</string>
-    <string name="step_overlay_granted">✓ Permission granted</string>
+    <string name="step_overlay_granted">✓ Overlay permission granted</string>
 
-    <string name="step_lock_title">Step 2: Screen Lock (Optional)</string>
+    <string name="step_lock_title">Screen Lock</string>
     <string name="step_lock_description">To lock your screen without the power button, QuickControl needs Device Administrator permission. This only enables the lock screen feature.</string>
     <string name="step_lock_button">Enable Device Admin</string>
     <string name="step_lock_granted">✓ Device Admin enabled</string>
     <string name="step_lock_skip">Skip — I don\'t need this</string>
 
-    <string name="step_accessibility_title">Step 3: Power Menu (Optional)</string>
+    <string name="step_accessibility_title">Power Menu</string>
     <string name="step_accessibility_description">To open the Android Power Menu (for restart/shutdown), QuickControl needs Accessibility Service permission. This is only used to trigger the system power dialog.</string>
     <string name="step_accessibility_button">Enable Accessibility Service</string>
     <string name="step_accessibility_granted">✓ Accessibility Service enabled</string>
+
     <string name="step_accessibility_skip">Skip — I don\'t need this</string>
 
     <string name="start_button">START QUICKCONTROL</string>

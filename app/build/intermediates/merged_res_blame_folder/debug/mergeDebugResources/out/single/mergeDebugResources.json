@@ -8,8 +8,20 @@
         "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\drawable\\ic_volume_down.xml"
     },
     {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_status_dot_active.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/status_dot_active.xml"
+    },
+    {
         "merged": "com.quickcontrol.app-debug-4:/drawable_edge_indicator_shape.xml.flat",
         "source": "com.quickcontrol.app-main-6:/drawable/edge_indicator_shape.xml"
+    },
+    {
+        "merged": "com.quickcontrol.app-debug-4:/color_chip_text_selector.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/color/chip_text_selector.xml"
+    },
+    {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_button_primary.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/button_primary.xml"
     },
     {
         "merged": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-debug-4:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
@@ -24,12 +36,12 @@
         "source": "com.quickcontrol.app-main-6:/layout/activity_settings.xml"
     },
     {
-        "merged": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-debug-4:\\xml_accessibility_service_config.xml.flat",
-        "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\xml\\accessibility_service_config.xml"
-    },
-    {
         "merged": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-debug-4:\\drawable_handle_shape.xml.flat",
         "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\drawable\\handle_shape.xml"
+    },
+    {
+        "merged": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-debug-4:\\xml_accessibility_service_config.xml.flat",
+        "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\xml\\accessibility_service_config.xml"
     },
     {
         "merged": "com.quickcontrol.app-debug-4:/layout_edge_panel.xml.flat",
@@ -44,8 +56,24 @@
         "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
+        "merged": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-debug-4:\\drawable_edge_indicator_shape.xml.flat",
+        "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\drawable\\edge_indicator_shape.xml"
+    },
+    {
         "merged": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-debug-4:\\drawable_ic_settings.xml.flat",
         "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\drawable\\ic_settings.xml"
+    },
+    {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_card_background.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/card_background.xml"
+    },
+    {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_status_dot_inactive.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/status_dot_inactive.xml"
+    },
+    {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_chip_option_selector.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/chip_option_selector.xml"
     },
     {
         "merged": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-debug-4:\\layout_edge_panel.xml.flat",
@@ -60,6 +88,10 @@
         "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\xml\\device_admin_policies.xml"
     },
     {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_ic_power.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/ic_power.xml"
+    },
+    {
         "merged": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-debug-4:\\drawable_button_background.xml.flat",
         "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\drawable\\button_background.xml"
     },
@@ -68,12 +100,40 @@
         "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\drawable\\panel_background.xml"
     },
     {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_ic_check.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/ic_check.xml"
+    },
+    {
         "merged": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-debug-4:\\drawable_ic_power.xml.flat",
         "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\drawable\\ic_power.xml"
     },
     {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_button_flashlight_active.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/button_flashlight_active.xml"
+    },
+    {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_button_secondary.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/button_secondary.xml"
+    },
+    {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_badge_granted.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/badge_granted.xml"
+    },
+    {
         "merged": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-debug-4:\\drawable_button_primary.xml.flat",
         "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\drawable\\button_primary.xml"
+    },
+    {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_badge_optional.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/badge_optional.xml"
+    },
+    {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_button_background.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/button_background.xml"
+    },
+    {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_button_stop.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/button_stop.xml"
     },
     {
         "merged": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-debug-4:\\layout_activity_main.xml.flat",
@@ -84,6 +144,18 @@
         "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\layout\\edge_handle.xml"
     },
     {
+        "merged": "com.quickcontrol.app-debug-4:/layout_activity_main.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_panel_background.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/panel_background.xml"
+    },
+    {
+        "merged": "com.quickcontrol.app-debug-4:/drawable_ic_arrow_back.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/ic_arrow_back.xml"
+    },
+    {
         "merged": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-debug-4:\\drawable_card_background.xml.flat",
         "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\drawable\\card_background.xml"
     },
@@ -92,7 +164,7 @@
         "source": "C:\\Users\\X-Y\\.gradle\\daemon\\8.11.1\\com.quickcontrol.app-main-6:\\drawable\\ic_volume_mute.xml"
     },
     {
-        "merged": "com.quickcontrol.app-debug-4:/layout_edge_handle.xml.flat",
-        "source": "com.quickcontrol.app-main-6:/layout/edge_handle.xml"
+        "merged": "com.quickcontrol.app-debug-4:/drawable_badge_required.xml.flat",
+        "source": "com.quickcontrol.app-main-6:/drawable/badge_required.xml"
     }
 ]
